@@ -22,6 +22,7 @@ select
 	t01.lgnr
 	,t01.datum
 	,round(sum(t01.wert_brutto),2) umsatz_brutto	
+	,t01.waehrung
 	,count(t01.ext_beleg) as cnt_bel
 	,round(sum(t01.wert_brutto) / count(t01.ext_beleg),2) as d_bon
 from 
@@ -42,7 +43,7 @@ from
 	  AND datneu >= current_date::timestamp
 ) t01
 group by
-	t01.lgnr,t01.datum
+	t01.lgnr,t01.datum,t01.waehrung
 order by
 	round(sum(t01.wert_brutto),2) desc;
 """
@@ -66,6 +67,7 @@ CREATE TABLE IF NOT EXISTS umsatz_summary (
     lgnr VARCHAR(50),
     datum datetime,
     umsatz_brutto DECIMAL(12,2),
+    waehrung VARCHAR(5),
     cnt_bel INT,
     d_bon DECIMAL(12,2)
 )
@@ -74,8 +76,8 @@ mysql_cursor.execute("TRUNCATE TABLE umsatz_summary")
 
 # Daten einfügen
 insert_query = """
-INSERT INTO umsatz_summary (lgnr, datum, umsatz_brutto, cnt_bel, d_bon)
-VALUES (%s, %s, %s, %s , %s)
+INSERT INTO umsatz_summary (lgnr, datum, umsatz_brutto, waehrung, cnt_bel, d_bon)
+VALUES (%s, %s, %s, %s , %s, %s)
 """
 mysql_cursor.executemany(insert_query, results)
 
