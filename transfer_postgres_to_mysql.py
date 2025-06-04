@@ -40,7 +40,7 @@ from
 	FROM impbel.ib_kopf
 	WHERE ext_rg_nr_small IS NOT NULL
 	  AND rec_status = 10
-	  AND datneu >= current_date::timestamp
+	  AND auf_dat >= current_date::timestamp
 ) t01
 group by
 	t01.lgnr,t01.datum,t01.waehrung
