@@ -34,8 +34,15 @@ MYSQL_DATABASE=xxxx
 ### 3. `transfer_postgres_to_mysql.py` Skript anlegen
 
 Das Python-Skript liest Daten aus einer PostgreSQL-Datenbank, bereitet sie auf und speichert sie in einer MySQL-Zieltabelle.
+Speichere folgendes Skript unter `/opt/umsatz_transfer/transfer_postgres_to_mysql.py` und stelle sicher, dass es ausführbar ist:
+
+```bash
+chmod +x /opt/umsatz_transfer/transfer_postgres_to_mysql.py
+```
 
 → Den vollständigen Code findest du in der Datei `transfer_postgres_to_mysql.py` im Projektverzeichnis.
+
+
 
 ### 4. Ausführung testen
 
