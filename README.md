@@ -10,7 +10,7 @@ Ein einfaches Python-Skript zur Übertragung von Umsatzdaten aus einer PostgreSQ
 cd /opt/umsatz_transfer
 python3 -m venv venv
 source venv/bin/activate
-pip install psycopg2-binary mysql-connector-python python-dotenv
+pip install psycopg2-binary mysql-connector-python python-dotenv requests
 ```
 
 ### 2. `.env` Datei anlegen
@@ -29,6 +29,9 @@ MYSQL_PORT=3306
 MYSQL_USER=xxx
 MYSQL_PASSWORD=xxx
 MYSQL_DATABASE=xxxx
+
+#GOOGLE MSG
+GOOGLE_CHAT_WEBHOOK_URL=https://chat.googleapis.com/v1/spaces/AAA.../messages?key=...&token=...
 ```
 
 ### 3. `transfer_postgres_to_mysql.py` Skript anlegen
