@@ -33,7 +33,10 @@ try:
     )
     pg_cursor = pg_conn.cursor()
 
-    # SQL-Abfrage
+    # Zeitzone für die Session auf Europe/Berlin setzen
+    pg_cursor.execute("SET timezone = 'Europe/Berlin'")
+
+    # SQL-Abfrage mit korrekter Zeitzonenbehandlung
     query = """
         select
             t01.lgnr
@@ -50,7 +53,7 @@ try:
             ,waehrung
             ,ext_beleg
             ,to_char(auf_dat, 'DD.MM.YYYY') auf_dat
-                ,to_char((current_timestamp + interval '2 hour'), 'YYYY-MM-DD HH24:MI:SS') as datum
+            ,to_char(current_timestamp, 'YYYY-MM-DD HH24:MI:SS') as datum
             ,case 
                 when ext_bel_art='kr' then wert_brutto*(-1)
                 else wert_brutto
